@@ -127,20 +127,8 @@
 								while($row = mysqli_fetch_array($result)) {
 
 echo"									<form name=\"admin_course_form\" action=\"admin_exec.php\" method=\"post\">
-";										$remarks=$_GET['remarks'];
-											if ($remarks==null and $remarks=="")
-											{
-											//echo 'Register Here';
-											}
-											if ($remarks=="wrong")
-											{
-											echo 'Course Name or ID already exists';
-											}
-											if ($remarks=='success')
-											{
-											echo 'Course added successfully';
-											}
-								$temp=$row['assignment'];
+";							
+												$temp=$row['assignment'];
 								echo "<tr>\n";
 echo "									<td>" . $row['course'] ."<input type=\"hidden\"name=\"name\" value=" . $row['course'] .">". "</td>\n";
 echo "									<td>" . $row['course_id'] . "<input type=\"hidden\"name=\"c_id\" value=" . $row['course_id'] .">". "</td>\n";
@@ -204,32 +192,34 @@ echo"									</form>\n";
 								if (mysqli_connect_errno()) {
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();
 								}
+								$remarks=$_GET['remarks'];
+								if ($remarks==null and $remarks=="")
+								{
+								//echo 'Register Here';
+								}
+								if ($remarks=="wrong_update")
+								{
+								echo 'There was an error, try again';
+								}
+								if ($remarks=='user_updated_success')
+								{
+								echo 'Information was updated succesfully';
+								}
 
 								$result = mysqli_query($con,"SELECT * FROM member");
 								while($row = mysqli_fetch_array($result)) {
-									if($row['admin'] == 0){	
+									if($row['admin'] == 0){
+										$stud_c = $row['comments']; 
+										$assn = 	$row['assignment_unique']; 
 echo"								<form name=\"admin_course_form\" action=\"admin_user_exec.php\" method=\"post\">\n";
-										$remarks=$_GET['remarks'];
-										if ($remarks==null and $remarks=="")
-										{
-										//echo 'Register Here';
-										}
-										if ($remarks=="wrong")
-										{
-										echo 'Course Name or ID already exists';
-										}
-										if ($remarks=='success')
-										{
-										echo 'Course added successfully';
-										}
-									echo "<tr>\n";
-echo "									<td>" . $row['username'] ."<input type=\"hidden\"name=\"user_name\" value=" . $row['course'] .">". "</td>\n";
-echo "									<td>" . $row['fname'] . "<input type=\"hidden\"name=\"f_name\" value=" . $row['course_id'] .">". "</td>\n";
-echo "									<td>" . $row['lname'] . "<input type=\"hidden\"name=\"l_name\" value=" . $row['course_id'] .">". "</td>\n";
+																	echo "<tr>\n";
+echo "									<td>" . $row['username'] ."<input type=\"hidden\"name=\"username\" value=" . $row['username'] .">". "</td>\n";
+echo "									<td>" . $row['fname'] . "<input type=\"hidden\"name=\"fname\" value=" . $row['fname'] .">". "</td>\n";
+echo "									<td>" . $row['lname'] . "<input type=\"hidden\"name=\"lname\" value=" . $row['lname'] .">". "</td>\n";
 echo "									<td>" . "<input type=\"text\"name=\"contact_num\" value=" . $row['contact'] .">". "</td>\n";
 echo "									<td>" . "<input type=\"text\"name=\"enrolled\" value=" . $row['enrolled_in'] .">". "</td>\n";
-echo "									<td>" . "<input type=\"text\"name=\"student_assign\" value=" . $row['assignment_unique'] .">". "</td>\n";
-echo "									<td>" . "<input type=\"text\"name=\"student_comment\" value=" . $row['comments'] .">". "</td>\n";
+echo "									<td>" . "<input type=\"text\"name=\"student_assign\" value=\"$assn \"></td>\n";
+echo "									<td>" . "<input type=\"text\"name=\"student_comment\" value=\"$stud_c \"></td>\n";
 echo "									<td>" . "<input type=\"text\"name=\"student_discount\" value=" . $row['discount'] .">". "</td>\n";
 echo "									<td><input name=\"\" type=\"submit\" value=\"update\" /></td>\n";
 echo "							</tr>\n";
