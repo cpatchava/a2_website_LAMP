@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-//require_once('auth.php');
+require_once('auth.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -72,7 +72,26 @@
 </head>
     
 <body>
-
+<?php
+	require_once('connection.php');
+	$id=$_SESSION['SESS_MEMBER_ID'];
+	$result3 = mysql_query("SELECT * FROM member where mem_id='$id'");
+	while($row3 = mysql_fetch_array($result3)){
+		$fname=$row3['fname'];
+		$lname=$row3['lname'];
+		$address=$row3['address'];
+		$contact=$row3['contact'];
+		$picture=$row3['picture'];
+		$gender=$row3['gender'];
+		$assign=$row3['assignment_unique'];
+		$comments=$row3['comments'];
+		$disc=$row3['discount'];
+		$enrolled=$row3['enrolled_in'];
+		$spaces = split(",", $enrolled);
+		$total= count($spaces);
+	}
+?>
+	
 <div class="container">
 		<div class="row">
 				<div class="box">
@@ -80,26 +99,26 @@
 						<hr><h2 class="intro-text text-center">Welcome<strong><?php echo $fname ?></strong></h2><hr>
 						</div>
 						<div class="col-md-4">
-								<div class="bs-example">
+						<div class="bs-example">
 										<table class="table">
 										<thead>
 										<tr>
-										<th>Course</th>
-										<th>#</th>
-										<th>Payment</th>
-										<th>Status</th>
+										<th>Course </th>
+										<th>Course #</th>
+										<th>Due date</th>
+										<th>Amount</th>
 										</tr>
 										</thead>
 										<tbody>
 										<tr class="active">
-										<td>1</td>
-										<td>Credit Card</td>
+										<td>Discount</td>
+										<td>D</td>
 										<td>04/07/2014</td>
-										<td>Call in to confirm</td>
+										<td><?php echo $disc?></td>
 										</tr>
 										<tr class="success">
 										<td>2</td>
-										<td>Water</td>
+										<td>Discount</td>
 										<td>01/07/2014</td>
 										<td>Paid</td>
 										</tr>
@@ -127,8 +146,12 @@
 						</div>
 
 						<div class="col-md-8">
+						<h1 class="intro-text text-center">Comments<strong></strong></h1><hr>
+						 <center><?php echo $comments ?></center>
+						<h1 class="intro-text text-center">Assignments<strong></strong></h1><hr>
+						 <center><?php echo "Personal:  $assign "?></center>
 
-						</div>
+					</div>
   					<div class="clearfix">
 						</div>
 				</div>

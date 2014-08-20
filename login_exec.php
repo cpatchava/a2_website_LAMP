@@ -58,7 +58,7 @@
     $_SESSION['SESS_ADMIN'] = $member['admin'];
     session_write_close();
 		if($_SESSION['SESS_ADMIN']=='0'){
-			header("location: home.php");
+			header("location: userpf.php");
 		}
 		else{
 			header("location: admin_page.php");

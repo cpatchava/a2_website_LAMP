@@ -180,6 +180,7 @@ echo"									</form>\n";
 										<th>Student Assignment</th>
 										<th>Comments for Students</th>
 										<th>Student Discount</th>
+										<th>Amount Paid</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -221,6 +222,7 @@ echo "									<td>" . "<input type=\"text\"name=\"enrolled\" value=" . $row['en
 echo "									<td>" . "<input type=\"text\"name=\"student_assign\" value=\"$assn \"></td>\n";
 echo "									<td>" . "<input type=\"text\"name=\"student_comment\" value=\"$stud_c \"></td>\n";
 echo "									<td>" . "<input type=\"text\"name=\"student_discount\" value=" . $row['discount'] .">". "</td>\n";
+echo "									<td>" . "<input type=\"text\"name=\"amount_paid\" value=" . $row['amnt_paid'] .">". "</td>\n";
 echo "									<td><input name=\"\" type=\"submit\" value=\"update\" /></td>\n";
 echo "							</tr>\n";
 echo "							</form>\n";
@@ -240,6 +242,7 @@ echo "							</form>\n";
 										<td><input type="text" name="new_assignment"></td>
 										<td><input type="text" name="new_comments" ></td>
 										<td><input type="text" name="discount" ></td>
+										<td><input type="text" name="amount_paid" ></td>
 										<td><input name="" type="submit" value="add" /></td>									
 										</div>
 								</form>

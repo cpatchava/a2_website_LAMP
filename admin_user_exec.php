@@ -10,6 +10,7 @@
   $student_assign=$_POST['student_assign'];
   $student_comment=$_POST['student_comment'];
   $discount=$_POST['student_discount'];
+  $paid=$_POST['amount_paid'];
 //	$date = new date('Y-m-d', $u_due);
 //  $query = mysql_query("SELECT * FROM course_info WHERE course='".$new_class."'");
 
@@ -27,6 +28,7 @@
 	mysql_query("UPDATE member SET assignment_unique='$student_assign'	WHERE username='$user_name' ");
 	mysql_query("UPDATE member SET comments='$student_comment'	WHERE username='$user_name' ");
 	mysql_query("UPDATE member SET discount='$discount'	WHERE username='$user_name' ");
+	mysql_query("UPDATE member SET amnt_paid='$paid'	WHERE username='$user_name' ");
 
   header("location: admin_page.php?remarks=user_updated_success");
 //  }
