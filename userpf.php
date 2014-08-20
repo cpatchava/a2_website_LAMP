@@ -87,7 +87,8 @@ require_once('auth.php');
 		$comments=$row3['comments'];
 		$disc=$row3['discount'];
 		$enrolled=$row3['enrolled_in'];
-		$spaces = split(",", $enrolled);
+		$amnt_paid=$row3['amnt_paid'];
+		$spaces = explode(",", $enrolled);
 		$total= count($spaces);
 	}
 ?>
@@ -95,8 +96,9 @@ require_once('auth.php');
 <div class="container">
 		<div class="row">
 				<div class="box">
+						<div align="right"><a href="login.php">logout</a></div>
 						<div class="col-lg-12">
-						<hr><h2 class="intro-text text-center">Welcome<strong><?php echo $fname ?></strong></h2><hr>
+						<hr><h2 class="intro-text text-center">Welcome <strong><?php echo $fname ?></strong></h2><hr>
 						</div>
 						<div class="col-md-4">
 						<div class="bs-example">
@@ -110,46 +112,65 @@ require_once('auth.php');
 										</tr>
 										</thead>
 										<tbody>
-										<tr class="active">
-										<td>Discount</td>
-										<td>D</td>
-										<td>04/07/2014</td>
-										<td><?php echo $disc?></td>
-										</tr>
-										<tr class="success">
-										<td>2</td>
-										<td>Discount</td>
-										<td>01/07/2014</td>
-										<td>Paid</td>
-										</tr>
-										<tr class="info">
-										<td>3</td>
-										<td>Internet</td>
-										<td>05/07/2014</td>
-										<td>Change plan</td>
-										</tr>
-										<tr class="warning">
-										<td>4</td>
-										<td>Electricity</td>
-										<td>03/07/2014</td>
-										<td>Pending</td>
-										</tr>
-										<tr class="danger">
-										<td>5</td>
-										<td>Telephone</td>
-										<td>06/07/2014</td>
-										<td>Due</td>
-										</tr>
+<?php
+$i=0;
+$tot=0;
+$assignment;
+$con=mysqli_connect("localhost","root","","simple_login");
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+while($i<$total){
+//danger, active, success, info, warning
+$result = mysqli_query($con,"SELECT * FROM course_info WHERE course_id='$spaces[$i]'");
+
+while($row = mysqli_fetch_array($result)) {
+echo"										<tr class=\"danger\">";
+echo"										<td>" . $row['course'] . "</td>";
+echo"										<td>" . $spaces[$i] . "</td>";
+echo"										<td>" . $row['due_date'] . "</td>";
+echo"										<td>+$" . $row['price'] . "</td>";
+echo"										</tr>	";
+$temp= $row['due_date']; 
+$tot=$row['price'] + $tot;
+$cou = $row['course'];
+$assignment = $row['assignment'];
+$fn = "$cou : $assignment <br> $fn";
+}						
+
+$i++;
+}
+echo"										<tr class=\"success\">";
+echo"										<td>Discount</td>";
+echo"										<td>D</td>";
+echo"										<td>$temp</td>";
+echo"										<td>-$$disc </td>";
+echo"										</tr>	";
+if($amnt_paid > '0'){
+	$string = "danger";
+}
+else{
+	$string = "success";
+}
+$tot = $tot - $disc;
+echo"										<tr class=\"$string\">";
+echo"										<td>Total</td>";
+echo"										<td>-</td>";
+echo"										<td>$temp</td>";
+echo"										<td> $$tot </td>";
+echo"										</tr>	";
+
+?>
 										</tbody>
 										</table>
 								</div>
 						</div>
 
 						<div class="col-md-8">
-						<h1 class="intro-text text-center">Comments<strong></strong></h1><hr>
+						<h1 class="intro-text text-center">Comments<strong></strong></h1>
 						 <center><?php echo $comments ?></center>
-						<h1 class="intro-text text-center">Assignments<strong></strong></h1><hr>
-						 <center><?php echo "Personal:  $assign "?></center>
+						<h1 class="intro-text text-center">Assignments<strong></strong></h1>
+						 <center><?php echo "Personal:  $assign  <br> $fn"?></center>
 
 					</div>
   					<div class="clearfix">
