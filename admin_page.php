@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-//require_once('auth.php');
+require_once('auth.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -117,7 +117,7 @@
 										?>	
 	
 								<?php
-								$con=mysqli_connect("localhost","root","","simple_login");
+								$con=mysqli_connect("localhost","root","admin","simple_login");
 								// Check connection
 								if (mysqli_connect_errno()) {
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -188,7 +188,7 @@ echo"									</form>\n";
 
 	
 								<?php
-								$con=mysqli_connect("localhost","root","","simple_login");
+								$con=mysqli_connect("localhost","root","admin","simple_login");
 								// Check connection
 								if (mysqli_connect_errno()) {
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();

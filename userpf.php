@@ -116,7 +116,7 @@ require_once('auth.php');
 $i=0;
 $tot=0;
 $assignment;
-$con=mysqli_connect("localhost","root","","simple_login");
+$con=mysqli_connect("localhost","root","admin","simple_login");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
