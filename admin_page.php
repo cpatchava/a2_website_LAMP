@@ -24,7 +24,7 @@ require_once('auth.php');
 
 <div class="brand">Algebra Squared
 </div>
-<div class="address-bar">  Park Circle E | Cupertino, California 95014 | algebrasquare@gmail.com
+<div class="address-bar">  Park Circle E | Cupertino, California 95014 | algebrasquared@gmail.com
 </div>
 <nav class="navbar navbar-default" role="navigation">
 <div class="container">
